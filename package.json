@@ -1,0 +1,12 @@
+{
+  "name": "autoes",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
