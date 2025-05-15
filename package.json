@@ -1,12 +1,36 @@
 {
   "name": "autoes",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "src/game.js",
   "scripts": {
-    "test": "npm test"
+    "start": "node src/game.js",
+    "test": "jest --coverage --verbose"
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cherrieshx/autoes.git"
+  },
+  "bugs":{
+    "url": "https://github.com/cherrieshx/autoes/issues"
+  },
+  "homepage": "https://github.com/cherrieshx/autoes#readme",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "jest":{
+     "collectCoverage": true,
+     "collectCoverageFrom": [
+      "src/calc.js"
+     ],
+     "coverageDirectory": "coverage",
+     "testEnvironment": "node"
+   },
+  "keywords": ["Guess Number"],
+  "author": "Huang Xiaoxue",
   "license": "ISC",
-  "description": ""
+  "description": "Command-line guess of number game built with Node.js. ",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  } 
 }
+
