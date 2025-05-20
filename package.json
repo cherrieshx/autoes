@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "main": "src/game.js",
   "scripts": {
-    "start": "node src/game.js",
-    "test": "jest --coverage --verbose"
-  },
+   "start": "node src/game.js",
+   "test": "jest --coverage --verbose",
+   "build": "next build"
+ },
   "repository": {
     "type": "git",
     "url": "https://github.com/cherrieshx/autoes.git"
