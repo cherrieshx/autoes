@@ -77,6 +77,8 @@ jobs:
         run: npm install --package-lock-only
       - run: npm ci
       - run: npm run build
+      - name: List output directory
+        run: ls -al ./out
       - name: Upload artifacts
         uses: actions/upload-pages-artifact@v4
         with:
