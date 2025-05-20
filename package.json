@@ -31,7 +31,13 @@
   "author": "Huang Xiaoxue",
   "license": "ISC",
   "description": "Command-line guess of number game built with Node.js. ",
+   
+  "dependencies": {
+    "jest": "^29.7.0",
+    "next": "^14.2.26"
+  },
   "devDependencies": {
-    "jest": "^29.7.0"
+    "eslint": "8.57.1",
+    "eslint-config-next": "15.2.4"
   }
 }
