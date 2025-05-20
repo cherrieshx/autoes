@@ -1,86 +1,85 @@
 name: test
 on:
- push:
-   branches:
-    - main
- pull_request:
-   branches:
-    - main
-jobs:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
- build:
+jobs:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout repo
+      - name: Checkout repo
         uses: actions/checkout@v4
-      - name: use node.js
+      - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22.x'
+      - name: Validate lockfile
+        run: npm install --package-lock-only
       - run: npm ci
       - run: npm run build
- test:
-     runs-on: ubuntu-latest
-     steps:
-       - name: Checkout repository
-         uses: actions/checkout@v4
 
-       - name: Setup Node.js
-         uses: actions/setup-node@v4
-         with:
-           node-version: '22.x'
-           cache: 'npm'
-           
-       - name: Installation
-         run: npm ci
-       
-       - name: Test with coverage
-         run: npm test -- --coverage 
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-       - name: Upload coverage report
-         uses: actions/upload-artifact@v4
-         with:
-            name: coverage-report
-            path: coverage/lcov-report
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          cache: 'npm'
 
- 
+      - name: Validate lockfile
+        run: npm install --package-lock-only
 
- deploy:
-      needs: test
+      - name: Installation
+        run: npm ci
       
-      permissions: 
-        contents: write
-        pages: write
-        id-token: write
+      - name: Test with coverage
+        run: npm test -- --coverage 
 
-      environment:
-        name: production
-        url: ${{ steps.deployment.outpus.page_url }}
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/lcov-report
 
-      runs-on: ubuntu-latest
-
-      steps:
-        - name: checkout repo
-          uses: actions/checkout@v4
-          with: 
-            token: ${{ secrets.GITHUB_TOKEN }}
-        - name: use node.js
-          uses: actions/setup-node@v4
-          with:
-            node-version: '22.x'
-      
-        - name: configure github pages
-          uses: actions/configure-pages@v4
-          with:
-            static_site_generator: next
-        - run: npm ci
-        - run: npm run build
-        - name: upload artifacts
-          uses: actions/upload-pages-artifact@v4
-          with:
-            path: "./out"
-        - name: deploy
-          id: deployment
-          uses: actions/deploy-pages@v4
-          
-      
+  deploy:
+    needs: test
+    permissions: 
+      contents: write
+      pages: write
+      id-token: write
+    environment:
+      name: production
+      url: ${{ steps.deployment.outpus.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with: 
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v4
+        with:
+          static_site_generator: next
+      - name: Validate lockfile
+        run: npm install --package-lock-only
+      - run: npm ci
+      - run: npm run build
+      - name: Upload artifacts
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: "./out"
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
