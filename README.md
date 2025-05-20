@@ -1,6 +1,6 @@
 # Gioco
 
-**Benvenuto nel gioco di guess numberrrrr**
+**Benvenuto nel gioco di guess number**
 Esso è un progettino sull'indovinare il numero fornendo indizi.
 
 ## Richieste
